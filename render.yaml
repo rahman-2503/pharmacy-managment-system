@@ -1,0 +1,188 @@
+services:
+  - type: web
+    name: eureka-server
+    runtime: image
+    image:
+      url: rahman5187/eureka-server:latest
+    region: oregon
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: SERVER_PORT
+        value: "8761"
+      - key: EUREKA_HOSTNAME
+        value: eureka-server
+
+  - type: web
+    name: api-gateway
+    runtime: image
+    image:
+      url: rahman5187/api-gateway:latest
+    region: oregon
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: "8080"
+      - key: EUREKA_URL
+        value: http://eureka-server.onrender.com/eureka/
+      - key: JWT_SECRET
+        generateValue: true
+
+  - type: web
+    name: user-service
+    runtime: image
+    image:
+      url: rahman5187/user-service:latest
+    region: oregon
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: "8081"
+      - key: EUREKA_URL
+        value: http://eureka-server.onrender.com/eureka/
+      - key: EUREKA_HOSTNAME
+        value: user-service
+      - key: DB_URL
+        value: jdbc:mysql://mysql-3c385771-syedrahman5187-pharmacy.l.aivencloud.com:28766/pharmacy_db?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - key: DB_USERNAME
+        value: avnadmin
+      - key: DB_PASSWORD
+        value: AVNS_YsvLGCGwf9qq8gSo5xk
+      - key: JWT_SECRET
+        generateValue: true
+
+  - type: web
+    name: order-service
+    runtime: image
+    image:
+      url: rahman5187/order-service:latest
+    region: oregon
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: "8082"
+      - key: EUREKA_URL
+        value: http://eureka-server.onrender.com/eureka/
+      - key: EUREKA_HOSTNAME
+        value: order-service
+      - key: DB_URL
+        value: jdbc:mysql://mysql-3c385771-syedrahman5187-pharmacy.l.aivencloud.com:28766/order_db?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - key: DB_USERNAME
+        value: avnadmin
+      - key: DB_PASSWORD
+        value: AVNS_YsvLGCGwf9qq8gSo5xk
+      - key: RABBITMQ_HOST
+        value: fuji.lmq.cloudamqp.com
+      - key: RABBITMQ_PORT
+        value: "5671"
+      - key: RABBITMQ_USERNAME
+        value: inzniazk
+      - key: RABBITMQ_PASSWORD
+        value: vw_LbH0xVLCQCFTKEut1zBYSx14SUkdY
+      - key: RABBITMQ_VIRTUAL_HOST
+        value: inzniazk
+      - key: RABBITMQ_SSL_ENABLED
+        value: "true"
+
+  - type: web
+    name: supplier-inventory-service
+    runtime: image
+    image:
+      url: rahman5187/supplier-inventory-service:latest
+    region: oregon
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: "8083"
+      - key: EUREKA_URL
+        value: http://eureka-server.onrender.com/eureka/
+      - key: DB_URL
+        value: jdbc:mysql://mysql-3c385771-syedrahman5187-pharmacy.l.aivencloud.com:28766/pharmacy_inventory?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - key: DB_USERNAME
+        value: avnadmin
+      - key: DB_PASSWORD
+        value: AVNS_YsvLGCGwf9qq8gSo5xk
+      - key: RABBITMQ_HOST
+        value: fuji.lmq.cloudamqp.com
+      - key: RABBITMQ_PORT
+        value: "5671"
+      - key: RABBITMQ_USERNAME
+        value: inzniazk
+      - key: RABBITMQ_PASSWORD
+        value: vw_LbH0xVLCQCFTKEut1zBYSx14SUkdY
+      - key: RABBITMQ_VIRTUAL_HOST
+        value: inzniazk
+      - key: RABBITMQ_SSL_ENABLED
+        value: "true"
+
+  - type: web
+    name: notification-service
+    runtime: image
+    image:
+      url: rahman5187/notification-service:latest
+    region: oregon
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: "8084"
+      - key: EUREKA_URL
+        value: http://eureka-server.onrender.com/eureka/
+      - key: DB_URL
+        value: jdbc:mysql://mysql-3c385771-syedrahman5187-pharmacy.l.aivencloud.com:28766/notification_db?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - key: DB_USERNAME
+        value: avnadmin
+      - key: DB_PASSWORD
+        value: AVNS_YsvLGCGwf9qq8gSo5xk
+      - key: RABBITMQ_HOST
+        value: fuji.lmq.cloudamqp.com
+      - key: RABBITMQ_PORT
+        value: "5671"
+      - key: RABBITMQ_USERNAME
+        value: inzniazk
+      - key: RABBITMQ_PASSWORD
+        value: vw_LbH0xVLCQCFTKEut1zBYSx14SUkdY
+      - key: RABBITMQ_VIRTUAL_HOST
+        value: inzniazk
+      - key: RABBITMQ_SSL_ENABLED
+        value: "true"
+
+  - type: web
+    name: payment-service
+    runtime: image
+    image:
+      url: rahman5187/payment-service:latest
+    region: oregon
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: "8085"
+      - key: EUREKA_URL
+        value: http://eureka-server.onrender.com/eureka/
+      - key: DB_URL
+        value: jdbc:mysql://mysql-3c385771-syedrahman5187-pharmacy.l.aivencloud.com:28766/payment_db?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - key: DB_USERNAME
+        value: avnadmin
+      - key: DB_PASSWORD
+        value: AVNS_YsvLGCGwf9qq8gSo5xk
+      - key: RABBITMQ_HOST
+        value: fuji.lmq.cloudamqp.com
+      - key: RABBITMQ_PORT
+        value: "5671"
+      - key: RABBITMQ_USERNAME
+        value: inzniazk
+      - key: RABBITMQ_PASSWORD
+        value: vw_LbH0xVLCQCFTKEut1zBYSx14SUkdY
+      - key: RABBITMQ_VIRTUAL_HOST
+        value: inzniazk
+      - key: JWT_SECRET
+        generateValue: true
+      - key: RAZORPAY_KEY_ID
+        value: YOUR_RAZORPAY_KEY_ID
+      - key: RAZORPAY_KEY_SECRET
+        value: YOUR_RAZORPAY_KEY_SECRET
