@@ -25,7 +25,7 @@ services:
       - key: SERVER_PORT
         value: "8080"
       - key: EUREKA_URL
-        value: https://eureka-server-z9yk.onrender.com/eureka/
+        value: https://eureka-server-3nyd.onrender.com/eureka/
       - key: JWT_SECRET
         generateValue: true
       - key: CORS_ALLOWED_ORIGINS
@@ -43,7 +43,7 @@ services:
       - key: SERVER_PORT
         value: "8081"
       - key: EUREKA_URL
-        value: https://eureka-server-z9yk.onrender.com/eureka/
+        value: https://eureka-server-3nyd.onrender.com/eureka/
       - key: EUREKA_HOSTNAME
         value: user-service
       - key: DB_URL
@@ -67,7 +67,7 @@ services:
       - key: SERVER_PORT
         value: "8082"
       - key: EUREKA_URL
-        value: https://eureka-server-z9yk.onrender.com/eureka/
+        value: https://eureka-server-3nyd.onrender.com/eureka/
       - key: EUREKA_HOSTNAME
         value: order-service
       - key: DB_URL
@@ -103,7 +103,7 @@ services:
       - key: SERVER_PORT
         value: "8083"
       - key: EUREKA_URL
-        value: https://eureka-server-z9yk.onrender.com/eureka/
+        value: https://eureka-server-3nyd.onrender.com/eureka/
       - key: DB_URL
         value: jdbc:mysql://mysql-3c385771-syedrahman5187-pharmacy.l.aivencloud.com:28766/pharmacy_inventory?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - key: DB_USERNAME
@@ -137,7 +137,7 @@ services:
       - key: SERVER_PORT
         value: "8084"
       - key: EUREKA_URL
-        value: https://eureka-server-z9yk.onrender.com/eureka/
+        value: https://eureka-server-3nyd.onrender.com/eureka/
       - key: DB_URL
         value: jdbc:mysql://mysql-3c385771-syedrahman5187-pharmacy.l.aivencloud.com:28766/notification_db?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - key: DB_USERNAME
@@ -171,7 +171,7 @@ services:
       - key: SERVER_PORT
         value: "8085"
       - key: EUREKA_URL
-        value: https://eureka-server-z9yk.onrender.com/eureka/
+        value: https://eureka-server-3nyd.onrender.com/eureka/
       - key: DB_URL
         value: jdbc:mysql://mysql-3c385771-syedrahman5187-pharmacy.l.aivencloud.com:28766/payment_db?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - key: DB_USERNAME
