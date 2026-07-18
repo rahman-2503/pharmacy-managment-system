@@ -86,6 +86,8 @@ services:
         value: inzniazk
       - key: RABBITMQ_SSL_ENABLED
         value: "true"
+      - key: SPRING_RABBITMQ_ADDRESSES
+        value: amqps://inzniazk:vw_LbH0xVLCQCFTKEut1zBYSx14SUkdY@fuji.lmq.cloudamqp.com:5671/inzniazk
 
   - type: web
     name: supplier-inventory-service
@@ -118,6 +120,8 @@ services:
         value: inzniazk
       - key: RABBITMQ_SSL_ENABLED
         value: "true"
+      - key: SPRING_RABBITMQ_ADDRESSES
+        value: amqps://inzniazk:vw_LbH0xVLCQCFTKEut1zBYSx14SUkdY@fuji.lmq.cloudamqp.com:5671/inzniazk
 
   - type: web
     name: notification-service
@@ -150,6 +154,8 @@ services:
         value: inzniazk
       - key: RABBITMQ_SSL_ENABLED
         value: "true"
+      - key: SPRING_RABBITMQ_ADDRESSES
+        value: amqps://inzniazk:vw_LbH0xVLCQCFTKEut1zBYSx14SUkdY@fuji.lmq.cloudamqp.com:5671/inzniazk
 
   - type: web
     name: payment-service
@@ -180,9 +186,13 @@ services:
         value: vw_LbH0xVLCQCFTKEut1zBYSx14SUkdY
       - key: RABBITMQ_VIRTUAL_HOST
         value: inzniazk
+      - key: RABBITMQ_SSL_ENABLED
+        value: "true"
+      - key: SPRING_RABBITMQ_ADDRESSES
+        value: amqps://inzniazk:vw_LbH0xVLCQCFTKEut1zBYSx14SUkdY@fuji.lmq.cloudamqp.com:5671/inzniazk
       - key: JWT_SECRET
         generateValue: true
       - key: RAZORPAY_KEY_ID
-        value: YOUR_RAZORPAY_KEY_ID
+        value: rzp_test_SkUT7TYdihPuCN
       - key: RAZORPAY_KEY_SECRET
-        value: YOUR_RAZORPAY_KEY_SECRET
+        value: V6C0KvJ3x5g4df05mafrZVbq
