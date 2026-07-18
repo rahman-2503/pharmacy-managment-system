@@ -31,6 +31,11 @@ public class JwtAuthFilter implements GlobalFilter {
         String path = exchange.getRequest().getURI().getPath();
         HttpMethod method = exchange.getRequest().getMethod();
 
+        // Allow CORS preflight through without auth
+        if (method == HttpMethod.OPTIONS) {
+            return chain.filter(exchange);
+        }
+
         // Public endpoints
         if (path.equals("/users/signup") || path.equals("/users/login") || path.startsWith("/payment/public")) {
             return chain.filter(exchange);
