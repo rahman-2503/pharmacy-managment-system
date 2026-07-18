@@ -28,6 +28,8 @@ services:
         value: https://eureka-server-z9yk.onrender.com/eureka/
       - key: JWT_SECRET
         generateValue: true
+      - key: CORS_ALLOWED_ORIGINS
+        value: http://localhost:4200,https://pharmacy-frontend.onrender.com
 
   - type: web
     name: user-service
