@@ -17,7 +17,7 @@ services:
     name: api-gateway
     runtime: image
     image:
-      url: rahman5187/api-gateway:latest
+      url: rahman5187/api-gateway-fixed:latest
     region: oregon
     plan: free
     healthCheckPath: /actuator/health
