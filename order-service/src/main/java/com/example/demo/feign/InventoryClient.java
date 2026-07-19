@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.OrderDTO.Drug;
 
-@FeignClient(name = "SUPPLIER-INVENTORY-SERVICE")
+@FeignClient(name = "SUPPLIER-INVENTORY-SERVICE", url = "${inventory.service.url}")
 public interface InventoryClient {
 
     @GetMapping("/inventory/drug/{id}")

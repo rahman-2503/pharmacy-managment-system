@@ -90,6 +90,10 @@ services:
         value: "true"
       - key: SPRING_RABBITMQ_ADDRESSES
         value: amqps://inzniazk:vw_LbH0xVLCQCFTKEut1zBYSx14SUkdY@fuji.lmq.cloudamqp.com:5671/inzniazk
+      - key: INVENTORY_SERVICE_URL
+        value: https://supplier-inventory-service.onrender.com
+      - key: PAYMENT_SERVICE_URL
+        value: https://payment-service-4w2d.onrender.com
 
   - type: web
     name: supplier-inventory-service
@@ -198,3 +202,5 @@ services:
         value: rzp_test_SkUT7TYdihPuCN
       - key: RAZORPAY_KEY_SECRET
         value: V6C0KvJ3x5g4df05mafrZVbq
+      - key: ORDER_SERVICE_URL
+        value: https://order-service-l60x.onrender.com
