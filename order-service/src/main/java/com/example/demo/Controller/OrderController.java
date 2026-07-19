@@ -11,7 +11,7 @@ import com.example.demo.entity.Order;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping({"/orders", "/orders/"})
 public class OrderController {
 
     private final OrderService service;
