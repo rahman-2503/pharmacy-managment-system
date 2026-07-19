@@ -59,7 +59,7 @@ services:
     name: order-service
     runtime: image
     image:
-      url: rahman5187/order-service:latest
+      url: rahman5187/order-service:v2.0.0
     region: oregon
     plan: free
     healthCheckPath: /actuator/health
@@ -167,7 +167,7 @@ services:
     name: payment-service
     runtime: image
     image:
-      url: rahman5187/payment-service:latest
+      url: rahman5187/payment-service:v2.0.0
     region: oregon
     plan: free
     healthCheckPath: /actuator/health
