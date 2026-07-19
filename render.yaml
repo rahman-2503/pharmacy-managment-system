@@ -27,7 +27,7 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-3nyd.onrender.com/eureka/
       - key: JWT_SECRET
-        generateValue: true
+        value: EA4L1qbX+OmMmn+6Cv2OXxgHSAFRlxE+Y/8Na58u5eY=
       - key: CORS_ALLOWED_ORIGINS
         value: http://localhost:4200,https://pharmacy-frontend-b6j5.onrender.com
 
@@ -53,7 +53,7 @@ services:
       - key: DB_PASSWORD
         value: AVNS_YsvLGCGwf9qq8gSo5xk
       - key: JWT_SECRET
-        generateValue: true
+        value: EA4L1qbX+OmMmn+6Cv2OXxgHSAFRlxE+Y/8Na58u5eY=
 
   - type: web
     name: order-service
@@ -193,7 +193,7 @@ services:
       - key: SPRING_RABBITMQ_ADDRESSES
         value: amqps://inzniazk:vw_LbH0xVLCQCFTKEut1zBYSx14SUkdY@fuji.lmq.cloudamqp.com:5671/inzniazk
       - key: JWT_SECRET
-        generateValue: true
+        value: EA4L1qbX+OmMmn+6Cv2OXxgHSAFRlxE+Y/8Na58u5eY=
       - key: RAZORPAY_KEY_ID
         value: rzp_test_SkUT7TYdihPuCN
       - key: RAZORPAY_KEY_SECRET
