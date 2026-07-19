@@ -8,7 +8,7 @@ import com.example.demo.entity.Payment;
 import com.example.demo.service.PaymentService;
 
 @RestController
-@RequestMapping("/payment")
+@RequestMapping({"/payment", "/payment/"})
 public class PaymentController {
 
     @Autowired

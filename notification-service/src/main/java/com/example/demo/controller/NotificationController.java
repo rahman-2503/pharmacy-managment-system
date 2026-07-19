@@ -11,7 +11,7 @@ import com.example.demo.entity.Notification;
 import com.example.demo.service.NotificationService;
 
 @RestController
-@RequestMapping("/notification")
+@RequestMapping({"/notification", "/notification/"})
 public class NotificationController {
 
     @Autowired

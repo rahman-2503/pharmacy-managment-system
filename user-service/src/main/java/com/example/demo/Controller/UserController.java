@@ -10,7 +10,7 @@ import com.example.demo.dto.UserResponseDTO;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping({"/users", "/users/"})
 public class UserController {
 
     private final UserService service;

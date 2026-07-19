@@ -12,7 +12,7 @@ import com.example.demo.service.DrugService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/inventory/drug")
+@RequestMapping({"/inventory/drug", "/inventory/drug/"})
 public class DrugController {
 
     @Autowired

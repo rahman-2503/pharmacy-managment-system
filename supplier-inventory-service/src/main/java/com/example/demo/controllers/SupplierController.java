@@ -12,7 +12,7 @@ import com.example.demo.service.SupplierService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/inventory/supplier")
+@RequestMapping({"/inventory/supplier", "/inventory/supplier/"})
 public class SupplierController {
 
     @Autowired
