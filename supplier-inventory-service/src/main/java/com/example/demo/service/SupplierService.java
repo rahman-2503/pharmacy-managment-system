@@ -37,6 +37,7 @@ public class SupplierService {
         existing.setName(supplier.getName());
         existing.setContact(supplier.getContact());
         existing.setAddress(supplier.getAddress());
+        existing.setEmail(supplier.getEmail());
         return repo.save(existing);
     }
 

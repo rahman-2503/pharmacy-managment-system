@@ -20,9 +20,8 @@ public class Supplier {
     @NotBlank(message = "Address is required")
     private String address;
 
-    // Optional: add email if needed
-    // @Email(message = "Invalid email format")
-    // private String email;
+    @Email(message = "Invalid email format")
+    private String email;
 
     // Getters & Setters
     public Long getId() { return id; }
@@ -36,4 +35,7 @@ public class Supplier {
 
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 }

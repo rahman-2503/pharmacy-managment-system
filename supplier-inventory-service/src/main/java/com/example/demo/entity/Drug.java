@@ -33,6 +33,10 @@ public class Drug {
     @Column(name = "photo_url")
     private String photoUrl;
 
+    // ✅ Supplier association (email of the supplying vendor)
+    @Column(name = "supplier_email")
+    private String supplierEmail;
+
 	public Long getId() {
 		return id;
 	}
@@ -79,6 +83,14 @@ public class Drug {
 
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
+	}
+
+	public String getSupplierEmail() {
+		return supplierEmail;
+	}
+
+	public void setSupplierEmail(String supplierEmail) {
+		this.supplierEmail = supplierEmail;
 	}
 
     
