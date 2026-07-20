@@ -167,7 +167,7 @@ services:
     name: payment-service
     runtime: image
     image:
-      url: rahman5187/payment-service:v2.0.0
+      url: rahman5187/payment-service:v2.0.1
     region: oregon
     plan: free
     healthCheckPath: /actuator/health

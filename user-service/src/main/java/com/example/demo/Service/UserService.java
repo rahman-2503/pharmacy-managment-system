@@ -11,6 +11,8 @@ import com.example.demo.model.Role;
 import com.example.demo.model.User;
 
 import jakarta.annotation.PostConstruct;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -90,6 +92,11 @@ public class UserService {
         User user = repo.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
         return map(user);
+    }
+
+    // ✅ Get all users (doctors + admin) for admin panel
+    public List<UserResponseDTO> getAllUsers() {
+        return repo.findAll().stream().map(this::map).collect(java.util.stream.Collectors.toList());
     }
 
     // ✅ Mapper

@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.Service.UserService;
+import java.util.List;
 import com.example.demo.dto.LoginRequestDTO;
 import com.example.demo.dto.SignUpRequestDTO;
 import com.example.demo.dto.UserResponseDTO;
@@ -42,5 +43,11 @@ public class UserController {
     @GetMapping("/{id}")
     public UserResponseDTO getUserProfile(@PathVariable Long id) {
         return service.getUserById(id);
+    }
+
+    // Get all registered users (doctors + admin) — used by admin panel
+    @GetMapping
+    public List<UserResponseDTO> getAllUsers() {
+        return service.getAllUsers();
     }
 }
