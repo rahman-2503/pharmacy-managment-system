@@ -32,11 +32,11 @@ public class UserService {
     // ✅ Hardcode single Admin at startup
     @PostConstruct
     public void initAdmin() {
-        if (repo.findByEmail("admin@pharmacy.com").isEmpty()) {
+        if (repo.findByEmail("admin@gmail.com").isEmpty()) {
             User admin = new User();
             admin.setName("System Admin");
-            admin.setEmail("admin@pharmacy.com");
-            admin.setPassword(encoder.encode("Admin@123")); // default password
+            admin.setEmail("admin@gmail.com");
+            admin.setPassword(encoder.encode("admin@123")); // default password
             admin.setRole(Role.ADMIN);
             admin.setContact("0000000000");
             repo.save(admin);
@@ -74,7 +74,7 @@ public class UserService {
 
     // ✅ Admin password change
     public String changeAdminPassword(String oldPassword, String newPassword) {
-        User admin = repo.findByEmail("admin@pharmacy.com")
+        User admin = repo.findByEmail("admin@gmail.com")
                 .orElseThrow(() -> new UserNotFoundException("Admin not found"));
 
         if (!encoder.matches(oldPassword, admin.getPassword())) {
