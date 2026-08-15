@@ -22,6 +22,13 @@ public class User {
 
     private String contact;
 
+    private String status;
+
+    public enum Status {
+        ACTIVE,
+        BLOCKED
+    }
+
     public User() {}
 
 	public Long getId() {
@@ -68,9 +75,17 @@ public class User {
 		return contact;
 	}
 
-	public void setContact(String contact) {
-		this.contact = contact;
-	}
+public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     
 }

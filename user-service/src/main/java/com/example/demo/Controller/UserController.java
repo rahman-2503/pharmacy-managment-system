@@ -50,4 +50,17 @@ public class UserController {
     public List<UserResponseDTO> getAllUsers() {
         return service.getAllUsers();
     }
+
+    // ✅ Toggle user status (ACTIVE <-> BLOCKED)
+    @PatchMapping("/{id}/status")
+    public String toggleUserStatus(@PathVariable Long id) {
+        return service.toggleUserStatus(id);
+    }
+
+    // ✅ Delete user permanently
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        service.deleteUser(id);
+        return "User deleted successfully";
+    }
 }

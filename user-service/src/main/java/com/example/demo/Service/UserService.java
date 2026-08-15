@@ -99,6 +99,22 @@ public class UserService {
         return repo.findAll().stream().map(this::map).collect(java.util.stream.Collectors.toList());
     }
 
+    // ✅ Toggle user status (ACTIVE <-> BLOCKED)
+    public String toggleUserStatus(Long id) {
+        User user = repo.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+        user.setStatus(user.getStatus().equals("ACTIVE") ? "BLOCKED" : "ACTIVE");
+        repo.save(user);
+        return user.getStatus();
+    }
+
+    // ✅ Delete user permanently
+    public void deleteUser(Long id) {
+        User user = repo.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+        repo.delete(user);
+    }
+
     // ✅ Mapper
     private UserResponseDTO map(User user) {
         UserResponseDTO dto = new UserResponseDTO();
@@ -107,6 +123,7 @@ public class UserService {
         dto.setEmail(user.getEmail());
         dto.setRole(user.getRole());
         dto.setContact(user.getContact());
+        dto.setStatus(user.getStatus());
         return dto;
     }
 }

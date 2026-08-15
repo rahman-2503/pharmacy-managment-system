@@ -8,6 +8,7 @@ public class UserResponseDTO {
     private String email;
     private Role role;
     private String contact;
+    private String status;
 
     public Long getId() {
         return id;
@@ -43,4 +44,13 @@ public class UserResponseDTO {
     public void setContact(String contact) {
         this.contact = contact;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }
