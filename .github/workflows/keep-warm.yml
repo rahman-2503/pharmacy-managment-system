@@ -2,7 +2,7 @@ name: Keep Render Services Warm
 
 on:
   schedule:
-    # Every 10 minutes — Render free tier spins down after ~15 min of inactivity
+    # Every 9 minutes - Render free tier spins down after ~15 min of inactivity
     - cron: '*/9 * * * *'
   workflow_dispatch:
 
@@ -16,19 +16,19 @@ jobs:
       matrix:
         service:
           - name: api-gateway
-            url: https://api-gateway-xysq.onrender.com/actuator/health
+            url: https://api-gateway-yt4u.onrender.com/health
           - name: user-service
-            url: https://user-service-id7r.onrender.com/actuator/health
+            url: https://user-service-6651.onrender.com/health
           - name: order-service
-            url: https://order-service-l60x.onrender.com/orders/
+            url: https://order-service-eh74.onrender.com/health
           - name: payment-service
-            url: https://payment-service-4w2d.onrender.com/payment/
+            url: https://payment-service-d118.onrender.com/health
           - name: inventory-service
-            url: https://supplier-inventory-service.onrender.com/inventory/drug
+            url: https://supplier-inventory-service.onrender.com/health
           - name: notification-service
-            url: https://notification-service-1636.onrender.com/notification?userId=keepalive
+            url: https://notification-service-5644.onrender.com/health
           - name: eureka-server
-            url: https://eureka-server-3nyd.onrender.com/actuator/health
+            url: https://eureka-server-djwk.onrender.com/health
     steps:
       - name: Ping ${{ matrix.service.name }}
         run: |
