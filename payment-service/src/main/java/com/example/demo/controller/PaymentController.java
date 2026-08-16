@@ -18,13 +18,17 @@ public class PaymentController {
     @Autowired
     private PaymentService service;
 
-    // ✅ Create Razorpay order
+    // ✅ Create Razorpay order (returns JSON, never throws — frontend never hangs)
     @PostMapping("/create")
-    public String createPayment(
+    public ResponseEntity<String> createPayment(
             @RequestParam Long orderId,
-            @RequestParam Integer amount
-    ) throws Exception {
-        return service.createPayment(orderId, amount.doubleValue());
+            @RequestParam(required = false) Integer amount
+    ) {
+        String result = service.createPayment(orderId, amount == null ? null : amount.doubleValue());
+        if (result.contains("\"success\":false")) {
+            return ResponseEntity.badRequest().body(result);
+        }
+        return ResponseEntity.ok(result);
     }
 
     // ✅ Secure success callback

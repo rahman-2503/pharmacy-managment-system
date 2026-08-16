@@ -18,6 +18,7 @@ import com.example.demo.feign.OrderClient;
 import com.example.demo.repository.PaymentRepository;
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
+import com.razorpay.RazorpayException;
 
 @Service
 public class PaymentService {
@@ -39,24 +40,52 @@ public class PaymentService {
     @Value("${razorpay.key.secret}")
     private String keySecret;
 
-    // ✅ Create Razorpay order
-    public String createPayment(Long orderId, Double amount) throws Exception {
-        RazorpayClient client = new RazorpayClient(keyId, keySecret);
-
-        JSONObject options = new JSONObject();
-        options.put("amount", amount.intValue() * 100); // convert to paisa
-        options.put("currency", "INR");
-        options.put("receipt", "order_rcptid_" + orderId);
-
-        Order order = client.orders.create(options);
-
+    // ✅ Create Razorpay order (robust: never throws, returns JSON with success/error)
+    public String createPayment(Long orderId, Double amount) {
         JSONObject response = new JSONObject();
-        response.put("razorpayOrderId", order.get("id").toString());
-        response.put("amount", Integer.parseInt(order.get("amount").toString()));
-        response.put("currency", order.get("currency").toString());
-        response.put("orderId", orderId);
+        try {
+            if (orderId == null) {
+                response.put("success", false);
+                response.put("message", "orderId is required");
+                return response.toString();
+            }
+            if (amount == null || amount <= 0) {
+                response.put("success", false);
+                response.put("message", "amount must be greater than zero");
+                return response.toString();
+            }
 
-        return response.toString();
+            RazorpayClient client = new RazorpayClient(keyId, keySecret);
+
+            JSONObject options = new JSONObject();
+            options.put("amount", Math.round(amount * 100)); // convert to paise
+            options.put("currency", "INR");
+            options.put("receipt", "order_rcptid_" + orderId);
+            options.put("notes", new JSONObject().put("orderId", orderId));
+
+            Order order = client.orders.create(options);
+
+            response.put("success", true);
+            response.put("razorpayOrderId", order.get("id").toString());
+            response.put("amount", Integer.parseInt(order.get("amount").toString()));
+            response.put("currency", order.get("currency").toString());
+            response.put("orderId", orderId);
+            response.put("keyId", keyId);
+            return response.toString();
+
+        } catch (RazorpayException e) {
+            log.error("Razorpay order creation failed for order {}: {}", orderId, e.getMessage());
+            response.put("success", false);
+            response.put("message", "Razorpay order creation failed: " + e.getMessage());
+            response.put("orderId", orderId);
+            return response.toString();
+        } catch (Exception e) {
+            log.error("Unexpected error creating Razorpay order for order {}", orderId, e);
+            response.put("success", false);
+            response.put("message", "Could not create payment order. Please try again.");
+            response.put("orderId", orderId);
+            return response.toString();
+        }
     }
 
     // ✅ Verify Razorpay signature
@@ -64,6 +93,9 @@ public class PaymentService {
                                    String paymentId,
                                    String signature) {
         try {
+            if (razorpayOrderId == null || paymentId == null || signature == null) {
+                return false;
+            }
             String payload = razorpayOrderId + "|" + paymentId;
 
             SecretKeySpec secretKey = new SecretKeySpec(

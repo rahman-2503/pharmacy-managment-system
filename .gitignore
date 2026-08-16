@@ -1,0 +1,25 @@
+# Local environment files (never commit secrets)
+**/.env
+*.env
+
+# Java build output
+**/target/
+**/build/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.classpath
+.settings/
+.project
+
+# Eclipse / OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node (if any)
+node_modules/

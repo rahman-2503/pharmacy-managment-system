@@ -1,6 +1,6 @@
 # Render Blueprint - Pharmacy Management System (microservices)
-# NOTE: Secrets are NOT stored here. They are set via env var groups / Render dashboard.
-# SERVICE_URLS contain onrender.com placeholders; replace with actual URLs after creating services.
+# Fresh deployment spec (v4.0.0). Secrets are NOT stored here; set them in the
+# Render dashboard / service env vars after creation.
 
 envVarGroups:
   - name: pharmacy-secrets
@@ -11,7 +11,7 @@ services:
     name: eureka-server
     runtime: image
     image:
-      url: rahman5187/eureka-server:3.0.0
+      url: rahman5187/eureka-server:4.0.0
     region: oregon
     plan: free
     healthCheckPath: /health
@@ -25,7 +25,7 @@ services:
     name: api-gateway
     runtime: image
     image:
-      url: rahman5187/api-gateway:3.0.0
+      url: rahman5187/api-gateway:4.0.0
     region: oregon
     plan: free
     healthCheckPath: /health
@@ -51,7 +51,7 @@ services:
     name: user-service
     runtime: image
     image:
-      url: rahman5187/user-service:3.0.0
+      url: rahman5187/user-service:4.0.0
     region: oregon
     plan: free
     healthCheckPath: /health
@@ -69,7 +69,7 @@ services:
       - key: EUREKA_HOSTNAME
         value: user-service.onrender.com
       - key: DB_URL
-        value: jdbc:postgresql://AIVEN-HOST:PORT/pharmacy_db?sslmode=require
+        value: jdbc:postgresql://pharmacy-postgres-syedrahman5187-pharmacy.l.aivencloud.com:28766/pharmacy_db?sslmode=require
       - key: DB_USERNAME
         value: avnadmin
       - key: DB_PASSWORD
@@ -81,7 +81,7 @@ services:
     name: order-service
     runtime: image
     image:
-      url: rahman5187/order-service:3.0.0
+      url: rahman5187/order-service:4.0.0
     region: oregon
     plan: free
     healthCheckPath: /health
@@ -99,7 +99,7 @@ services:
       - key: EUREKA_HOSTNAME
         value: order-service.onrender.com
       - key: DB_URL
-        value: jdbc:postgresql://AIVEN-HOST:PORT/order_db?sslmode=require
+        value: jdbc:postgresql://pharmacy-postgres-syedrahman5187-pharmacy.l.aivencloud.com:28766/order_db?sslmode=require
       - key: DB_USERNAME
         value: avnadmin
       - key: DB_PASSWORD
@@ -123,7 +123,7 @@ services:
     name: supplier-inventory-service
     runtime: image
     image:
-      url: rahman5187/supplier-inventory-service:3.0.0
+      url: rahman5187/supplier-inventory-service:4.0.0
     region: oregon
     plan: free
     healthCheckPath: /health
@@ -141,7 +141,7 @@ services:
       - key: EUREKA_HOSTNAME
         value: supplier-inventory-service.onrender.com
       - key: DB_URL
-        value: jdbc:postgresql://AIVEN-HOST:PORT/pharmacy_inventory?sslmode=require
+        value: jdbc:postgresql://pharmacy-postgres-syedrahman5187-pharmacy.l.aivencloud.com:28766/pharmacy_inventory?sslmode=require
       - key: DB_USERNAME
         value: avnadmin
       - key: DB_PASSWORD
@@ -165,7 +165,7 @@ services:
     name: notification-service
     runtime: image
     image:
-      url: rahman5187/notification-service:3.0.0
+      url: rahman5187/notification-service:4.0.0
     region: oregon
     plan: free
     healthCheckPath: /health
@@ -183,7 +183,7 @@ services:
       - key: EUREKA_HOSTNAME
         value: notification-service.onrender.com
       - key: DB_URL
-        value: jdbc:postgresql://AIVEN-HOST:PORT/notification_db?sslmode=require
+        value: jdbc:postgresql://pharmacy-postgres-syedrahman5187-pharmacy.l.aivencloud.com:28766/notification_db?sslmode=require
       - key: DB_USERNAME
         value: avnadmin
       - key: DB_PASSWORD
@@ -207,7 +207,7 @@ services:
     name: payment-service
     runtime: image
     image:
-      url: rahman5187/payment-service:3.0.0
+      url: rahman5187/payment-service:4.0.0
     region: oregon
     plan: free
     healthCheckPath: /health
@@ -225,7 +225,7 @@ services:
       - key: EUREKA_HOSTNAME
         value: payment-service.onrender.com
       - key: DB_URL
-        value: jdbc:postgresql://AIVEN-HOST:PORT/payment_db?sslmode=require
+        value: jdbc:postgresql://pharmacy-postgres-syedrahman5187-pharmacy.l.aivencloud.com:28766/payment_db?sslmode=require
       - key: DB_USERNAME
         value: avnadmin
       - key: DB_PASSWORD
@@ -250,3 +250,21 @@ services:
         sync: false
       - key: RAZORPAY_KEY_SECRET
         sync: false
+
+  - type: web
+    name: pharmacy-frontend
+    runtime: node
+    repo: https://github.com/rahman-2503/-pharmacy-frontend
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    region: oregon
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.22.3
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
