@@ -16,19 +16,21 @@ jobs:
       matrix:
         service:
           - name: api-gateway
-            url: https://api-gateway-yt4u.onrender.com/health
+            url: https://api-gateway-dbuu.onrender.com/health
           - name: user-service
-            url: https://user-service-6651.onrender.com/health
+            url: https://user-service-5x8c.onrender.com/health
           - name: order-service
-            url: https://order-service-eh74.onrender.com/health
+            url: https://order-service-irvh.onrender.com/health
           - name: payment-service
-            url: https://payment-service-d118.onrender.com/health
+            url: https://payment-service-6drh.onrender.com/health
           - name: inventory-service
             url: https://supplier-inventory-service.onrender.com/health
           - name: notification-service
-            url: https://notification-service-5644.onrender.com/health
+            url: https://notification-service-h2df.onrender.com/health
           - name: eureka-server
-            url: https://eureka-server-djwk.onrender.com/health
+            url: https://eureka-server-f8h8.onrender.com/health
+          - name: frontend
+            url: https://pharmacy-frontend-0ftx.onrender.com/health
     steps:
       - name: Ping ${{ matrix.service.name }}
         run: |
