@@ -87,6 +87,24 @@ public class UserService {
         return "Admin password updated successfully";
     }
 
+    // ✅ Admin resets a doctor's password (admin panel feature)
+    public String resetDoctorPassword(Long id, String newPassword) {
+        if (newPassword == null || newPassword.length() < 4) {
+            throw new InvalidCredentialsException("New password must be at least 4 characters");
+        }
+
+        User user = repo.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+
+        if (user.getRole() == Role.ADMIN) {
+            throw new InvalidCredentialsException("Cannot reset the admin password here; use the change-password flow instead.");
+        }
+
+        user.setPassword(encoder.encode(newPassword));
+        repo.save(user);
+        return "Password updated successfully for " + user.getEmail();
+    }
+
     // ✅ Get user profile by ID
     public UserResponseDTO getUserById(Long id) {
         User user = repo.findById(id)

@@ -74,6 +74,10 @@ public class JwtAuthFilter implements GlobalFilter {
             if ("DOCTOR".equals(role)) {
                 // Doctor can view/get user profile
                 if (path.startsWith("/users")) {
+                    // Doctor password reset is admin-only
+                    if (path.contains("/reset-password")) {
+                        return forbidden(exchange);
+                    }
                     return forward(exchange, chain, authHeader);
                 }
                 // Doctor can view/get notifications

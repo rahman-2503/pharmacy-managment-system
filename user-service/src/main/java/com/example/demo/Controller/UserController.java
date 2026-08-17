@@ -39,6 +39,13 @@ public class UserController {
         return service.changeAdminPassword(oldPassword, newPassword);
     }
 
+    // ✅ Admin resets a doctor's password (admin panel feature)
+    @PostMapping("/{id}/reset-password")
+    public String resetDoctorPassword(@PathVariable Long id,
+                                      @RequestParam String newPassword) {
+        return service.resetDoctorPassword(id, newPassword);
+    }
+
     // Get user profile by ID
     @GetMapping("/{id}")
     public UserResponseDTO getUserProfile(@PathVariable Long id) {
