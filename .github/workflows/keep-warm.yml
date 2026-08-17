@@ -2,8 +2,8 @@ name: Keep Render Services Warm
 
 on:
   schedule:
-    # Every 9 minutes - Render free tier spins down after ~15 min of inactivity
-    - cron: '*/9 * * * *'
+    # Every 5 minutes - Render free tier spins down after ~15 min of inactivity
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
